@@ -33,6 +33,13 @@ main {
   margin-bottom: 60px;
 }
 
+@media (min-width: 1300px) {
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
 .card-id {
   display: flex;
   width: 450px;
