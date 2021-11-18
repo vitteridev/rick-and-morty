@@ -32,7 +32,6 @@
     const $mainContent = document.querySelector("#content");
     const $template = document.querySelector("#template");
     const fragment = document.createDocumentFragment();
-    console.log(api);
 
     const templateContent = $template.content;
     const $imagePath = templateContent.querySelector(".pic-id");
@@ -110,8 +109,19 @@
     $mainContent.appendChild(fragment);
   };
 
+  const loading = (estado) => {
+    const loading = document.querySelector("#spinner");
+    if (estado) {
+      loading.hidden = estado;
+    } else {
+      loading.hidden = estado;
+    }
+  };
+
   const cargarPersonajes = async () => {
     try {
+      loading(false);
+
       const respuesta = await fetch(
         `https://rickandmortyapi.com/api/character?page=${pagina}`
       );
@@ -119,7 +129,6 @@
       const status = respuesta.status;
 
       if (status === 200) {
-        console.log(respuesta);
         const datos = await respuesta.json();
         mostrarPersonajes(datos);
       } else if (status === 401) {
@@ -131,6 +140,8 @@
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      loading(true);
     }
   };
 
